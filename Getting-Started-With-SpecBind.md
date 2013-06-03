@@ -14,8 +14,9 @@ One of the key features of SpecBind is it features a common set of steps that ca
 
 See the following topics for more information about available steps and actions:
 
-
-- [[Navigation|Navigation Steps]]
-- [[Waiting For a Page To Load|Waiting Steps]]
+* [[Navigation|Navigation Steps]]
+* [[Waiting For a Page To Load|Waiting Steps]]
+* [[Entering Data|Entering Data Steps]]
+* [[Clicking Items|Clicking Items Steps]]
 
 
