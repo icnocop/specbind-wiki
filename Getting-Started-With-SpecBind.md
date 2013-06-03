@@ -1,18 +1,21 @@
-## What is SpecBind?
+## Getting to your web application
+The first step in working with SpecBind and web applications is letting the application know where the root URL of the site is. This is done in the app.config file of the project, under an element named *application* and an attribute named _startUrl_. If you were using CodedUI as your driver, your configuration section would look something like this:
 
-SpecBind is an extension to SpecFlow that uses common language steps to allow a user to define interaction with an application. Unlike conventional SpecFlow where the user needs to define how each step definition interacts with the host system, SpecBind uses conventions and a thin page model to minimize coding efforts and maximize flexibility when defining the link between specifications and working sites.
+```xml
+<specBind>
+    <application startUrl="http://something.com/MyApplication" />
+    <browserFactory provider="SpecBind.CodedUI.CodedUIBrowserFactory, SpecBind.CodedUI" browserType="IE" />
+</specBind>
+```
 
-## Initial Setup
+## Step Overview
 
-Getting SpecBind installed is a simple process:
+One of the key features of SpecBind is it features a common set of steps that can be used to describe actions you take in validating a web application. These steps are outlined by their functionality in this guide or in the [[Step Reference]] section. One thing to note is how they work with the Gherkin language. For any **Given** steps the step is in the past tense. This is because it assumes the action is a prerequisite and has already occurred. The **When** and **Then** steps are in the present tense since they are what the test indicates should occur. In this guide, both commands will be outlined so that the syntax is know, but only the present tense will be used for examples. 
 
-1. Go to http://www.specflow.org and follow the instructions for installing the Visual Studio Extension
-2. Choose the driver type you want to use to interact with the host system:
-	* CodedUI (Recommended)
-	* Watin
-3. Create a new test project in Visual Studio, Make it a Coded UI project if you are using that.
-4. Install the NuGet package for SpecBind
+See the following topics for more information about available steps and actions:
 
-```PM> Install-Package SpecBind.CodedUI```
 
-And you're done! Follow the Starting your SpecBind Project section to begin creating tests, or Understanding SpecBind Steps for more explanation on how to work with SpecBind.
+- [[Navigation|Navigation Steps]]
+- [[Waiting For a Page To Load|Waiting Steps]]
+
+
