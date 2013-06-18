@@ -18,5 +18,6 @@ See the following topics for more information about available steps and actions:
 * [[Waiting For a Page To Load|Waiting Steps]]
 * [[Entering Data|Entering Data Steps]]
 * [[Clicking Items|Clicking Items Steps]]
+* [[Verifying Items|Verifying Steps]]
 
 

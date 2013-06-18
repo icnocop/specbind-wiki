@@ -41,3 +41,14 @@ This may also apply to a scenario where you want to change focus to a dialog or 
 | Then | I am on the \<property name\> dialog |
 
 The \<property name\> parameter maps to a property on the current page that will return the HTML element that is the root of that dialog. This is to support most modern dialog design where the dialog is a HTML element within the page.
+
+In the same way you may need to dig into a list on the page to enter data or click an item. A step is available to switch from the page context to the context of an item from the list.
+
+| Verb | Action |
+|------|--------|
+| Given | I was on list \<property name\> item \<item number\> |
+| Then | I am on list \<property name\> item \<item number\> |
+
+The \<property name\> parameter maps to a property on the current page that is the list. The *Item Number* parameter is a numerical value for the item on the list to switch to. 
+
+At any point you can use the same command to switch back out to a different context.
