@@ -44,8 +44,10 @@ In this case *field name* indicates the [[property|Page Model Properties]] that 
 | List Rule | Description |
 |-----------|-------------|
 | Contains | At least one row in the list matches all the validations. |
+| Equals | All of the items in the list match the validations. |
 | Exists | At least one row in the list matches all the validations. |
 | Does Not Contain | No rows in the list match the validations. |
+| Does Not Equal | None of the rows in the list match the validations. |
 | Not Exists | No rows in the list match the validations. |
 | Starts With | The first row in the list matches the validations. |
 | Ends With | The last row in the list matches the validations. |
