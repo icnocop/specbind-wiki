@@ -4,12 +4,11 @@ At points in your scenario you may want to gather dynamic data that you use at a
 
 Data gathering typically occurs during an [[input|Entering Data Steps]] step. Instead of specifying a value you specify a curly brace "\{" followed by the name of the token without spaces or special characters, followed by a closing curly brace "\}". The colon "\:" that follows is the value section of the token. You can put any static data you need here. This may also come from a scenario hook. An example of this in a SpecFlow table would be:
 
-
 ```Cucumber
 When I enter data
 | Field | Value     |
-| ID    | {MyToken:Some Data} | 
-``` 
+| ID    | {MyToken:Some Data} |
+```
 
 In some cases you may want to enter random data to test items like string lengths or fuzz testing. To do this some special values exist for the value portion of the token. If you have other needs for random data let us know! Here are some examples:
 
@@ -29,7 +28,7 @@ Similar to other actions *token name* corresponds with the name of the token you
 
 ```Cucumber
 When I set token MyToken with the value of Customer ID
-``` 
+```
 
 ### Verifying Data With Tokens ###
 
@@ -39,7 +38,7 @@ Similarly, when you need check this value during [[verification|Verifying Steps]
 When I see
 | Field | Rule   | Value     |
 | ID    | Equals | {MyToken} | 
-``` 
+```
 
 ### Getting or Setting Token Values In Code ###
 
@@ -54,34 +53,32 @@ using SpecBind.Helpers;
 
 namespace MyApplication.MySteps
 {
-	[Binding]
+    [Binding]
     public class MyCustomSteps
     {
-		private const string TokenId = "WidgetToken"; 
+	private const string TokenId = "WidgetToken"; 
 
-		private readonly ITokenManager tokenManager;
+	private readonly ITokenManager tokenManager;
 		
-		public MyCustomSteps(ITokenManager tokenManager)
-		{
-			this.tokenManager = tokenManager;
-		}
+	public MyCustomSteps(ITokenManager tokenManager)
+	{
+            this.tokenManager = tokenManager;
+	}
 
-		[Given("I create a new widget")]
+    	[Given("I create a new widget")]
     	public void GivenICreateANewWidget()
     	{
-			int myNewWidgetId = 1;
-			
-			// Do some database stuff here
-
-			this.tokenManager.SetToken(TokenId, myNewWidgetId);
+            int myNewWidgetId = 1;
+	
+            // Do some database stuff here
+            this.tokenManager.SetToken(TokenId, myNewWidgetId);
     	}
 
-		[Then("I remove the new widget")]
+    	[Then("I remove the new widget")]
     	public void ThenIRemoveTheNewWidget()
     	{
-			int myNewWidgetId = this.tokenManager.GetTokenByKey(TokenId);
-			
-			// Do some database stuff here to remove the widget
+            int myNewWidgetId = this.tokenManager.GetTokenByKey(TokenId);	
+            // Do some database stuff here to remove the widget
     	}
     }
 }
