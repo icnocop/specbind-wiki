@@ -29,7 +29,7 @@ Similar to navigation, when you select a link or perform an action, the browser 
 | Verb | Action |
 |------|--------|
 | Given | I was on the \<page name\> page |
-| Then | I am on the \<page name\> page |
+| When, Then | I am on the \<page name\> page |
 
 The \<page name\> parameter maps to the page class in code, and the navigation attribute attached to it. It then combines that with the base address of the site and commands the browser to navigate to that URL and ensures it navigates successfully. For more information on mapping pages and navigation, see [[Page Navigation Binding]]
 
@@ -38,7 +38,7 @@ This may also apply to a scenario where you want to change focus to a dialog or 
 | Verb | Action |
 |------|--------|
 | Given | I was on the \<property name\> dialog |
-| Then | I am on the \<property name\> dialog |
+| When, Then | I am on the \<property name\> dialog |
 
 The \<property name\> parameter maps to a property on the current page that will return the HTML element that is the root of that dialog. This is to support most modern dialog design where the dialog is a HTML element within the page.
 
@@ -47,7 +47,7 @@ In the same way you may need to dig into a list on the page to enter data or cli
 | Verb | Action |
 |------|--------|
 | Given | I was on list \<property name\> item \<item number\> |
-| Then | I am on list \<property name\> item \<item number\> |
+| When, Then | I am on list \<property name\> item \<item number\> |
 
 The \<property name\> parameter maps to a property on the current page that is the list. The *Item Number* parameter is a numerical value for the item on the list to switch to. 
 
