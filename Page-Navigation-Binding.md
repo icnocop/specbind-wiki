@@ -62,7 +62,7 @@ namespace My.Application
 ```
 ### Working with Pages Outside Your Site
 
-In cases such as Single Sign On or testing integration into 3rd party applications, you may find the need to manipulate pages that are outside your site. This requires a simple modification to the *PageNavigation* attribute to indicate that you are navigating to a fixed URL. To achieve this, change the link string to an absolute URL like "www.mysite.com/login" and add a parameter IsAbsloute = true in the attribute. The example below demonstrates this.
+In cases such as Single Sign On or testing integration into 3rd party applications, you may find the need to manipulate pages that are outside your site. This requires a simple modification to the *PageNavigation* attribute to indicate that you are navigating to a fixed URL. To achieve this, change the link string to an absolute URL like "www.mysite.com/login" and add a parameter IsAbsoluteUrl = true in the attribute. The example below demonstrates this.
 
 ```C#
 using System;
@@ -71,7 +71,7 @@ using Microsoft.VisualStudio.TestTools.UITesting;
 
 namespace My.Application
 {
-	[PageNavigation("http://www.mysite.com/login", IsAbsolute = true)]
+	[PageNavigation("http://www.mysite.com/login", IsAbsoluteUrl = true)]
 	public class ExternalLogin:HtmlDocument
 	{
 		public ProductsPage(UITestControl parent) : base(parent)
