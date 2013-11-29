@@ -16,3 +16,29 @@ As with other property locators, SpecBind normalizes the name so that you can ma
 ```Cucumber
 When I choose Checkout
 ``` 
+
+### Browser Dialogs
+
+At times browsers may raise a JavaScript alert to notify the user of something. These alerts are simple and generally have an accept and dismiss button and optionally a text entry field. There are two steps available to dismissing an alert. The first is for an alert that does not contain a text field:
+
+| Verb  | Action                     |
+|-------|----------------------------|
+| Given | I saw an alert box and selected \<button name\>  |
+| When  | I see an alert box and select \<button name\> |
+
+```Cucumber
+When I see an alert box and select Ok
+``` 
+
+In this case button name can be one of Ok, Cancel, Yes, No, Retry, Ignore. If text needs to be entered the following can be used:
+
+| Verb  | Action                     |
+|-------|----------------------------|
+| Given | I saw an alert box, entered "\<text\>" and selected \<button name\>  |
+| When  | I see an alert box, enter "\<text\>" and select \<button name\> |
+
+```Cucumber
+When I see an alert box, entered "Hello!" and select Ok
+``` 
+
+In this case \<text\> is what you want to put in the input box and should be surrounded in quotes.
