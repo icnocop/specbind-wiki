@@ -14,7 +14,9 @@
 
 ### Developing Page Binding Code
 * [[Page Navigation Binding]]
-* [[Page Model Properties]]
+* [[Page Model Properties - Coded UI|Page Model Properties]]
+* [[Page Model Properties - Selenium|Page Model Properties Selenium]]
 * [[Working With Lists]]
 * [[Dialog Pages]]
 * [[Frames]]
+* [[Executing JavaScript In Pages]]

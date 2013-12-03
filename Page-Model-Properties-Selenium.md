@@ -1,4 +1,4 @@
-### Property Mapping - Coded UI
+### Property Mapping - Selenium
 
 Once you have created your [[page|Page Navigation Binding]], the next step is to define fields or other items on the page that need to be accessed. This is done by adding properties to the page class. The property name is used by SpecBind to match to the requested field name in the step. The system attempts to normalize language as shown in the following example (note these don't make linguistic sense just shown as an example):
 
@@ -16,51 +16,33 @@ Properties can all be represented as public get/set automatic properties, since 
 
 |Attribute Name|Description|Applicable HTML Elements|
 |--------------|-----------|------------------------|
-| Alt | Matches by the alternate text on an element | Image, Hyperlink |
+| Alt | Matches by the alternate text on an element | Image, Hyperlink, Requires TagName |
 | Class | Matches by the HTML class name on the element | All |
 | Id | Matches by the Id attribute of an element| All |
 | Index | Matches by the index of the item if it is in a sequence | All |
 | Name | Matches by the name attribute of an input element | Input elements |
-| TagName | Matches by the name of the tag i.e. \<li\> = "li" | Should only be used with HtmlCustom controls |
-| Text | Matches by the inner text of the element | All |
-| Title | Matches by the window title of a contained HTML control | All |
-| Type | Matches by the type attribute of an HTML input control | Input elements |
-| Url | Matches by the URL of the element | Image, Hyperlink |
+| TagName | Matches by the name of the tag i.e. \<li\> = "li" | Encouraged on most controls that don't search by ID or Name |
+| Text | Matches by the inner text of the element | All, Requires TagName |
+| Title | Not Supported | - |
+| Type | Matches by the type attribute of an HTML input control | Input elements, Requires TagName |
+| Url | Matches by the URL of the element | Image, Hyperlink, Requires TagName |
 
-The last piece is performed by the data type of the property, which is the native framework class that represents the field type. For in depth details see the the driver's native documentation, however a limited list of items is provided below to provide a basic mapping between HTML elements and properties
+Selenium also provided a similar attribute named *FindByAttribute* in their support assembly. SpecBind respects the existence of these tags to support pages created before SpecBind and will remove any duplicate locators.
 
-| Name | HTML Element | CodedUI Class | Required Locator Attributes |
-|------|--------------|---------------|-----------------------------|
-| Button | \<button\> | HtmlButton | None |
-| Check Box | \<checkbox\> | HtmlCheckBox | None |
-| Combo Box | \<select\> | HtmlComboBox | None |
-| Div | \<div\> | HtmlDiv | None |
-| File Input | \<input type="FileInput"/> | HtmlFileInput | None |
-| Hyperlink | \<a\> | HtmlHyperlink | None |
-| Input Submit | \<input type="submit"\> | HtmlInputButton | Type="submit" |
-| Password | \<input type="password"\> | HtmlEdit | Type="PASSWORD" |
-| Span | \<span\> | HtmlSpan | None |
-| Text Area | \<textarea\> | HtmlTextArea | None |
-| Textbox | \<input\> | HtmlEdit | None |
-
-Once these have been completed a property in your class would look something like the following sample:
+All framework properties for Selenium are represented as *IWebElement* items. Once these have been completed a property in your class would look something like the following sample:
 
 ```C#
 using System;
-using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
-using Microsoft.VisualStudio.TestTools.UITesting;
+using OpenQA.Selenium;
+using SpecBind.Pages;
 
 namespace My.Application
 {
 	[PageNavigation("/products")]
-	public class ProductsPage:HtmlDocument
+	public class ProductsPage
 	{
-		public ProductsPage(UITestControl parent) : base(parent)
-		{
-		}
-
 		[ElementLocator(Id = "submit")]
-		public HtmlButton Submit { get; set; }
+		public IWebElement Submit { get; set; }
 	}
 }
 ```
@@ -82,29 +64,26 @@ A page model to get to the first error in this list would look like:
 
 ```C#
 using System;
-using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
-using Microsoft.VisualStudio.TestTools.UITesting;
+using OpenQA.Selenium;
+using SpecBind.Pages;
+using SpecBind.Selenium;
 
 namespace My.Application
 {
 	[PageNavigation("/products")]
-	public class ProductsPage:HtmlDocument
+	public class ProductsPage
 	{
-		public ProductsPage(UITestControl parent) : base(parent)
-		{
-		}
-
 		[ElementLocator(Id = "validation-errors")]
 		public ErrorPanelDiv ErrorsPanel { get; set; }
 
-		public class ErrorPanelDiv : HtmlDiv
+		public class ErrorPanelDiv : WebElement
 		{
-			public ErrorPanelDiv(UITestControl parent):base(parent)
+			public ErrorPanelDiv(ISearchContext parent):base(parent)
 			{
 			}
 			
 			[ElementLocator(TagName = "LI", Index = 1)]
-			public HtmlCustom ErrorItem { get; set; }
+			public IWebElement ErrorItem { get; set; }
 		}
 	}
 }
@@ -114,37 +93,34 @@ This way you can access the error item as a nested element. In some cases you ma
 
 ```C#
 using System;
-using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
-using Microsoft.VisualStudio.TestTools.UITesting;
+using OpenQA.Selenium;
+using SpecBind.Pages;
+using SpecBind.Selenium;
 
 namespace My.Application
 {
 	[PageNavigation("/products")]
 	public class ProductsPage:HtmlDocument
 	{
-		public ProductsPage(UITestControl parent) : base(parent)
-		{
-		}
-
 		public string LoginError
 		{
 			get
 			{
-				return this.ErrorsPanel.ErrorItem.InnerText;
+				return this.ErrorsPanel.ErrorItem.Text;
 			}
 		}
 
 		[ElementLocator(Id = "validation-errors")]
 		public ErrorPanelDiv ErrorsPanel { get; set; }
 
-		public class ErrorPanelDiv : HtmlDiv
+		public class ErrorPanelDiv : WebElement
 		{
-			public ErrorPanelDiv(UITestControl parent):base(parent)
+			public ErrorPanelDiv(ISearchContext parent):base(parent)
 			{
 			}
 			
 			[ElementLocator(TagName = "LI", Index = 1)]
-			public HtmlCustom ErrorItem { get; set; }
+			public IWebElement ErrorItem { get; set; }
 		}
 	}
 }

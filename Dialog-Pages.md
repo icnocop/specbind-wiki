@@ -23,6 +23,6 @@ Inline dialogs are easy to construct. The look like [[page classes|Page Navigati
 	}
 ``` 
 
-## JavaScript Dialogs
+### JavaScript Dialogs
 
-Currently JavaScript dialogs are not supported, they are being considered as an addition to a future release.
+JavaScript dialogs are all handled through the [[Clicking Items Steps]] and do not require any additional coding behind the scenes.

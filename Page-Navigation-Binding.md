@@ -26,6 +26,7 @@ A sample page using CodedUI as a driver would look like:
 using System;
 using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 using Microsoft.VisualStudio.TestTools.UITesting;
+using SpecBind.Pages;
 
 namespace My.Application
 {
@@ -39,6 +40,22 @@ namespace My.Application
 }
 ```
 
+In Selenium it would look like:
+
+```C#
+using System;
+using OpenQA.Selenium;
+using SpecBind.Pages;
+
+namespace My.Application
+{
+	[PageNavigation("/products")]
+	public class ProductsPage
+	{
+	}
+}
+```
+
 ### Aliasing Pages
 
 In some cases you may have a page where the class name does not match the name in the steps, or multiple names may refer to the same model. In this case you can use the *PageAlias* attribute to specify a different name the page should map to. The following example shows how the "Products" page maps to an alias of "Product List" page.
@@ -47,6 +64,7 @@ In some cases you may have a page where the class name does not match the name i
 using System;
 using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 using Microsoft.VisualStudio.TestTools.UITesting;
+using SpecBind.Pages;
 
 namespace My.Application
 {
@@ -60,6 +78,23 @@ namespace My.Application
 	}
 }
 ```
+In Selenium it would look like:
+
+```C#
+using System;
+using OpenQA.Selenium;
+using SpecBind.Pages;
+
+namespace My.Application
+{
+	[PageNavigation("/products")]
+	[PageAlias("Product List")]
+	public class ProductsPage
+	{
+	}
+}
+```
+
 ### Working with Pages Outside Your Site
 
 In cases such as Single Sign On or testing integration into 3rd party applications, you may find the need to manipulate pages that are outside your site. This requires a simple modification to the *PageNavigation* attribute to indicate that you are navigating to a fixed URL. To achieve this, change the link string to an absolute URL like "www.mysite.com/login" and add a parameter IsAbsoluteUrl = true in the attribute. The example below demonstrates this.
@@ -68,15 +103,32 @@ In cases such as Single Sign On or testing integration into 3rd party applicatio
 using System;
 using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 using Microsoft.VisualStudio.TestTools.UITesting;
+using SpecBind.Pages;
 
 namespace My.Application
 {
 	[PageNavigation("http://www.mysite.com/login", IsAbsoluteUrl = true)]
 	public class ExternalLogin:HtmlDocument
 	{
-		public ProductsPage(UITestControl parent) : base(parent)
+		public ExternalLogin(UITestControl parent) : base(parent)
 		{
 		}
+	}
+}
+```
+
+In Selenium it would look like:
+
+```C#
+using System;
+using OpenQA.Selenium;
+using SpecBind.Pages;
+
+namespace My.Application
+{
+	[PageNavigation("http://www.mysite.com/login", IsAbsoluteUrl = true)]
+	public class ExternalLogin
+	{
 	}
 }
 ```

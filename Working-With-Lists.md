@@ -17,7 +17,7 @@ Most applications consist of lists of elements. These can be grids, tables, or j
 
 ### Constructing The List
 
-To construct a list, a special interface exists named *SpecBind.Pages.IElementList\<TParent,TChild\>*. The *TParent* generic type is the element type of the top level element. The *TChild* generic type is the element type of each individual list item. This will generally be a custom nested class to allow access to each field. If we were to represent a list that matched the HTML structure above it would look like:
+To construct a list, a special interface exists named *SpecBind.Pages.IElementList\<TParent,TChild\>*. The *TParent* generic type is the element type of the top level element. The *TChild* generic type is the element type of each individual list item. This will generally be a custom nested class to allow access to each field. If we were to represent a list that matched the HTML structure above in Coded UI it would look like:
 
 ```C#
 using System;
@@ -45,6 +45,36 @@ namespace My.Application
 			
 			[ElementLocator(Id = "productName")]
 			public HtmlDiv ProductName { get; set; }
+		}
+	}
+}
+```
+
+In Selenium the page would look similar:
+
+
+```C#
+using System;
+using OpenQA.Selenium;
+using SpecBind.Pages;
+using SpecBind.Selenium;
+
+namespace My.Application
+{
+	[PageNavigation("/products")]
+	public class ProductsPage
+	{
+		[ElementLocator(Id = "productList")]
+		public IElementList<IWebElement, ProductItemDiv> ErrorsPanel { get; set; }
+
+		public class ProductItemDiv : WebElement
+		{
+			public ProductItemDiv(ISearchContext parent):base(parent)
+			{
+			}
+			
+			[ElementLocator(Id = "productName")]
+			public IWebElement ProductName { get; set; }
 		}
 	}
 }
