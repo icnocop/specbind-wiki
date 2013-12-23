@@ -27,3 +27,4 @@ One of the key features of SpecBind is it features a common set of steps that ca
 
 Follow the [[Getting Started|Getting Started With SpecBind]] section to begin creating tests, or [[Documentation]] for in detailed information on SpecBind.
 
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/f6786120cace9c1cea118e5a9fc4e776 "githalytics.com")](http://githalytics.com/dpiessens/specbind)
