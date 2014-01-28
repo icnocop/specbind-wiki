@@ -42,7 +42,24 @@ This may also apply to a scenario where you want to change focus to a dialog or 
 
 The \<property name\> parameter maps to a property on the current page that will return the HTML element that is the root of that dialog. This is to support most modern dialog design where the dialog is a HTML element within the page.
 
-In the same way you may need to dig into a list on the page to enter data or click an item. A step is available to switch from the page context to the context of an item from the list.
+### Selecting Items in a List
+
+In the same way you may need to dig into a list on the page to enter data or click an item. Two steps are available to switch from the page context to the context of an item from the list.
+
+| Verb | Action |
+|------|--------|
+| Given | I was on \<property name\> list item matching criteria \<table\> |
+| When, Then | I am on \<property name\> list item matching criteria \<table\> |
+
+The \<property name\> parameter maps to a property on the current page that is the list. The <table> is a criteria table similar to what is used in validation that you can use to find an item in the list. An example of this step would be:
+
+```Cucumber
+When I am on Products list item matching criteria
+|| Field || Rule || Value ||
+| Product ID | Equals | 12 |
+```
+
+Select an item by order in the list:
 
 | Verb | Action |
 |------|--------|
@@ -50,5 +67,6 @@ In the same way you may need to dig into a list on the page to enter data or cli
 | When, Then | I am on list \<property name\> item \<item number\> |
 
 The \<property name\> parameter maps to a property on the current page that is the list. The *Item Number* parameter is a numerical value for the item on the list to switch to. 
+
 
 At any point you can use the same command to switch back out to a different context.
