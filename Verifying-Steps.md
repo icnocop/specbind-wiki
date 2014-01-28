@@ -7,7 +7,17 @@ The final key part of the process is verifying that what you expect to see on th
 | Given | I saw \<validation table\> |
 | When | I see \<validation table\> |
 
-The *validation table* is a SpecFlow table that consists of three columns; *Field*, *Rule* and *Value*. Similar to data entry steps the *Field* column defines the field name to locate as a [[property|Page Model Properties]] and the *Value* column is the value to check. It is converted to the correct value by the framework, and will throw an error if the value cannot be converted. The *Rule* column determines the type of validation to perform on the field.
+The *validation table* is a SpecFlow table that consists of three columns; *Field*, *Rule* and *Value*. Similar to data entry steps the *Field* column defines the field name to locate as a [[property|Page Model Properties]] and the *Value* column is the value to check. The *Rule* column determines the type of validation to perform on the field. The *Value* column is the expected value to check for. It also drives how the expected and actual values are compared. 
+
+The system attempts to convert the expected value to one of the following data types in the order described below. This eases matching of a given value from some of the formatting hassles. For instance if your value is a date, and you write an expectation of "1/1/2013" and your actual value is "January 1, 2013" the rule processor will determine that these values indeed match.
+
+* Date Time (Uses standard .NET date/time formatting according to the current culture)
+* Double
+* Integer
+* Boolean
+* String (default)
+
+Using those data types, the following rules come with the framework for analysis:
 
 | Rule | Description |
 |------|-------------|
@@ -19,6 +29,10 @@ The *validation table* is a SpecFlow table that consists of three columns; *Fiel
 | Does Not Contains | The actual value does not contain the expected value within it. |
 | Starts With | The actual value starts with the expected value. |
 | Ends With | The actual value ends with the expected value. |
+| Greater Than | Checks numeric or date types for the actual value to be greater than the expected value. |
+| Greater Than Equals | Checks numeric or date types for the actual value to be greater than or equal to the expected value. |
+| Less Than | Checks numeric or date types for the actual value to be less than the expected value. |
+| Less Than Equals | Checks numeric or date types for the actual value to be less than or equal to the expected value. |
 | Exists | The specified field exists. |
 | Does Not Exist | The specified field does not exist. |
 | Enabled | The specified field is enabled for editing. |
@@ -52,4 +66,4 @@ In this case *field name* indicates the [[property|Page Model Properties]] that 
 | Starts With | The first row in the list matches the validations. |
 | Ends With | The last row in the list matches the validations. |
 
-Support for defining custom validation rules will be coming in a future release.
+Custom validation rules can also be defined for the system, for more information see [[Custom Validation Rules]].
