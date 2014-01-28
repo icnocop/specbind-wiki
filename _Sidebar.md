@@ -20,3 +20,4 @@
 * [[Dialog Pages]]
 * [[Frames]]
 * [[Executing JavaScript In Pages]]
+* [[Custom Validation Rules]]
