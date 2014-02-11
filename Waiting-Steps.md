@@ -15,6 +15,12 @@ While the above method introduces the most flexibility, a simpler set of steps a
 | When | I wait to see \<property name\> |
 | Then | I wait to see \<property name\> | 
 
+| Verb | Action |
+|------|--------|
+| Given | I waited for \<seconds\> seconds to see \<property name\> |
+| When | I wait for \<seconds\> seconds to see \<property name\> |
+| Then | I wait for \<seconds\> seconds to see \<property name\> | 
+
 **Check to see if an element is not displayed**
 
 | Verb | Action |
@@ -22,6 +28,12 @@ While the above method introduces the most flexibility, a simpler set of steps a
 | Given | I waited to not see \<property name\> |
 | When | I wait to not see \<property name\> |
 | Then | I wait to not see \<property name\> | 
+
+| Verb | Action |
+|------|--------|
+| Given | I waited for \<seconds\> seconds to not see \<property name\> |
+| When | I wait for \<seconds\> seconds to not see \<property name\> |
+| Then | I wait for \<seconds\> seconds to not see \<property name\> | 
 
 **Check to see if an element is enabled**
 
@@ -31,7 +43,19 @@ While the above method introduces the most flexibility, a simpler set of steps a
 | When | I wait for \<property name\> to become enabled |
 | Then | I wait for \<property name\> to become enabled | 
 
+| Verb | Action |
+|------|--------|
+| Given | I waited \<seconds\> seconds for \<property name\> to become enabled |
+| When | I wait \<seconds\> seconds for \<property name\> to become enabled |
+| Then | I wait \<seconds\> seconds for \<property name\> to become enabled | 
+
 **Check to see if an element is disabled**
+
+| Verb | Action |
+|------|--------|
+| Given | I waited \<seconds\> seconds for \<property name\> to become disabled |
+| When | I wait \<seconds\> seconds for \<property name\> to become disabled |
+| Then | I wait \<seconds\> seconds for \<property name\> to become disabled | 
 
 | Verb | Action |
 |------|--------|
@@ -43,11 +67,4 @@ The example below shows waiting for Checkout to become enabled:
 
 ```Cucumber
 Given I waited for Checkout to become enabled
-``` 
-
-
-Again, with any of the above command you can add "for \<seconds\> second(s)" to the end to specify a timeout for waiting. An example below is waiting for Checkout to become enabled for 20 seconds:
-
-```Cucumber
-Given I waited for Checkout to become enabled for 20 seconds
 ``` 
