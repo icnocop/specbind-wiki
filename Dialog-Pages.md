@@ -10,7 +10,7 @@ Inline dialogs are easy to construct. The look like [[page classes|Page Navigati
 	[ElementLocator(Id = "modal-no-btn")]
 	public class DeleteConfirmDialog : HtmlDiv
 	{
-		public DeleteConfirmElement(UITestControl parent)
+		public DeleteConfirmDialog(UITestControl parent)
 			: base(parent)
 		{
 		}
