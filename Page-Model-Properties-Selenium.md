@@ -18,6 +18,7 @@ Properties can all be represented as public get/set automatic properties, since 
 |--------------|-----------|------------------------|
 | Alt | Matches by the alternate text on an element | Image, Hyperlink, Requires TagName |
 | Class | Matches by the HTML class name on the element | All |
+| CssSelector | Matches by a CSS selector tied to the element | All |
 | Id | Matches by the Id attribute of an element| All |
 | Index | Matches by the index of the item if it is in a sequence | All |
 | Name | Matches by the name attribute of an input element | Input elements |
