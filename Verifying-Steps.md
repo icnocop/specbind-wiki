@@ -33,7 +33,7 @@ Using those data types, the following rules come with the framework for analysis
 | Greater Than Equals | Checks numeric or date types for the actual value to be greater than or equal to the expected value. |
 | Less Than | Checks numeric or date types for the actual value to be less than the expected value. |
 | Less Than Equals | Checks numeric or date types for the actual value to be less than or equal to the expected value. |
-| Exists | The specified field exists. |
+| Exists | The specified field exists and is visible. |
 | Does Not Exist | The specified field does not exist. |
 | Enabled | The specified field is enabled for editing. |
 | Is Enabled | Same as *Enabled* |
