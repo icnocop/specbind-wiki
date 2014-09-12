@@ -63,6 +63,20 @@ While the above method introduces the most flexibility, a simpler set of steps a
 | When | I wait for \<property name\> to become disabled |
 | Then | I wait for \<property name\> to become disabled | 
 
+**Check to see if a list element contains items**
+
+| Verb | Action |
+|------|--------|
+| Given | I waited \<seconds\> seconds for \<property name\> to contain items |
+| When | I wait \<seconds\> seconds for \<property name\> to contain items |
+| Then | I wait \<seconds\> seconds for \<property name\> to contain items | 
+
+| Verb | Action |
+|------|--------|
+| Given | I waited for \<property name\> to become to contain items |
+| When | I wait for \<property name\> to become to contain items |
+| Then | I wait for \<property name\> to become to contain items | 
+
 The example below shows waiting for Checkout to become enabled:
 
 ```Cucumber
