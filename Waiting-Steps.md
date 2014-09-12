@@ -73,9 +73,9 @@ While the above method introduces the most flexibility, a simpler set of steps a
 
 | Verb | Action |
 |------|--------|
-| Given | I waited for \<property name\> to become to contain items |
-| When | I wait for \<property name\> to become to contain items |
-| Then | I wait for \<property name\> to become to contain items | 
+| Given | I waited for \<property name\> to contain items |
+| When | I wait for \<property name\> to contain items |
+| Then | I wait for \<property name\> to contain items | 
 
 The example below shows waiting for Checkout to become enabled:
 
