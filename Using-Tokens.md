@@ -40,6 +40,19 @@ When I see
 | ID    | Equals | {MyToken} | 
 ```
 
+### Verifying Token Values ###
+
+At points in the process you may want to validate that a token has a given value. There is a step in SpecBind that allows you to do this. 
+
+*Introduced in version 1.4*
+
+| Verb | Action |
+|------|--------|
+| Given, When, Then | I ensure token \<token name\> matches rule \<rule\> with value \<check value\> |
+
+The *token name* variable is the name of the token. *rule* is the comparison you want to use against the *check value*. In most cases this is _equals_, but you can use any comparison step used in [[verification|Verifying Steps]].
+
+
 ### Getting or Setting Token Values In Code ###
 
 In some cases you may need custom steps or scenario hooks that setup or tear down data and set token values in these areas of code. For this, an interface exists named *SpecBind.Helpers.ITokenManager* that you can request in the constructor of your step. The example below shows two custom steps that get and set a token value. To learn more about injecting dependencies into your steps see [Context Injection](https://github.com/techtalk/SpecFlow/wiki/Context-Injection) in SpecFlow documentation. 

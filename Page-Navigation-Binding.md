@@ -138,3 +138,36 @@ namespace My.Application
 Most navigation and matching is performed through the *PageNavigation* attribute. The first and default argument of this attribute is the sub-portion of the URL to match. This is formed by combining the base URL that you define in the [[configuration|Configuration]] section with this argument, then using it as a "starts with" comparison with the actual browser URL (for [[frames|Frames]] this is the frame URL). Since this is a starts with comparison, a sample URL of (http://mysite.com/products/1) would succeed with the *PageNavigation* attribute was set as "/products". This argument can also contain regular expressions so an argument of "/products/[0-9]+".
 
 SpecBind also uses this navigation argument to compose the URL to navigate to on a navigation step. Most of the time this matches the validation URL and no further work is needed. If you do need to specify regular expressions to match the URL, you may need to also pass arguments into the created URL on a navigation command. For this a second optional argument named *UrlTemplate* can be used. For this specify a standard .NET format string, that will be filled in by the table used in the [[navigation step|Navigation Steps]]. A sample attribute value for the URL (http://mysite.com/products/1) would be "/products/{Id}".
+
+### Post Navigation Hooks
+
+In some cases it may become necessary to perform a particular action on a page after it has been navigated to. Examples my be to disable animations or set some JavaScript value to indicate testing. If this is necessary, there's an action pipeline method that can be created to handle this. Simply create the class below in your project and use the _IPage_ object provided to get properties on the page or use the _GetNativePage<>()_ method to get the actual page class you created. This can be useful if you want to use a base class model and invoke the page on each call. The example also demonstrates how you can access the TokenManager inside the hook.
+
+```C#
+namespace My.Application
+{
+    using System.Collections.Generic;
+
+    using SpecBind.Actions;
+    using SpecBind.Helpers;
+    using SpecBind.Pages;
+
+    public class TestPostNavigateHook : NavigationPostAction
+    {
+        private readonly ITokenManager tokenManager;
+
+        public TestPostNavigateHook(ITokenManager tokenManager)
+        {
+            this.tokenManager = tokenManager;
+        }
+
+        protected override void OnPageNavigate(IPage page, PageNavigationAction.PageAction actionType, IDictionary<string, string> pageArguments)
+        {
+			// Do any page manipulation here
+            // The PageAction enum can be used to determine if this was a navigation action or ensure action
+
+            this.tokenManager.SetToken("NavigatedPageSuccess", page.PageType.Name);
+        }
+    }
+}
+```
