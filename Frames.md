@@ -19,10 +19,10 @@ Most frames are in a top level element called a frameset. Each internal element 
 		{
 		}
 
-		[ElementLocator(Id = "CSIMenu")]
+		[ElementLocator(Id = "Menu")]
 		public HtmlFrame MenuFrame { get; set; }
 
-		[ElementLocator(Id = "CSIMain")]
+		[ElementLocator(Id = "Main")]
 		public HtmlFrame MainFrame { get; set; }
 	}
 ``` 
