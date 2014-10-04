@@ -126,3 +126,14 @@ namespace My.Application
 	}
 }
 ```
+
+## Accessing Element Attributes
+
+If you want to validate a property of an element, you don't need to create a property that accesses it. Instead you can add a _PropertyAccess_ attribute on the element. It requires the HTML attribute you wish to access returned as a string and the new name of the property. Note this property can only be used for validation. 
+
+``` C#
+
+    [ElementLocator(Id = "loginLink")]
+    [PropertyAccess(Attribute="href" Name="LogOnUrl")]
+    public IWebElement LogOn { get; set; }
+```
