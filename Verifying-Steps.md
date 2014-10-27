@@ -17,6 +17,8 @@ The system attempts to convert the expected value to one of the following data t
 * Boolean
 * String (default)
 
+Note that for numeric types, the presence of a decimal point will trigger the presence as a double. If there is no decimal point, then the number will be treated as an integer.
+
 Using those data types, the following rules come with the framework for analysis:
 
 | Rule | Description |
