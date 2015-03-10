@@ -139,6 +139,46 @@ Most navigation and matching is performed through the *PageNavigation* attribute
 
 SpecBind also uses this navigation argument to compose the URL to navigate to on a navigation step. Most of the time this matches the validation URL and no further work is needed. If you do need to specify regular expressions to match the URL, you may need to also pass arguments into the created URL on a navigation command. For this a second optional argument named *UrlTemplate* can be used. For this specify a standard .NET format string, that will be filled in by the table used in the [[navigation step|Navigation Steps]]. A sample attribute value for the URL (http://mysite.com/products/1) would be "/products/{Id}".
 
+### Setting Cookies
+
+** New with SpecBind 1.5 **
+For some sites it may become necessary to manually inject a cookie into the browser before the navigation is performed. This may be to suppress a dialog, set a preference or disable an ad. To do this an attribute exists named *SetCookie* that requires the cookie name and value. **HttpOnly is not supported since the cookie is injected by the browser** It also supports the following options:
+
+|Name|Type|Description|
+|----|----|-----------|
+| Name | String | The cookie name |
+| Value | String | The cookie contents (will be encoded automatically)|
+| Path | String | The path under the root to set the cookie, defaults to "/" |
+| Domain | String | The domain of the cookie (generally must be your site) |
+| IsSecure | Boolean | Only passes the cookie over https |
+| Expires | String | A representation of when the cookie expires, see below |
+
+The *Expires* property supports several types of values
+
+| Type | Example | Action |
+|-------|---------|--------|
+| Infinate Cookie | DateTime.MaxValue | Sets a cookie that never expires |
+| Remove Cookie | DateTime.MinValue | Removes a currently set cookie |
+| Fixed Date | 12/22/2015 12\:00\:00 AM | A fixed point in time with the code |
+| Relative to Now (in seconds) | 120 | Sets a value in seconds relative to the time the test is run|
+
+An example is posted below of how a typical cookie is set and expires in 60 minutes.
+
+```C#
+using System;
+using OpenQA.Selenium;
+using SpecBind.Pages;
+
+namespace My.Application
+{
+	[PageNavigation("http://www.mysite.com/login", IsAbsoluteUrl = true)]
+    [SetCookie("MyCookie", "some value", Expires = "3600")]
+	public class ExternalLogin
+	{
+	}
+}
+```
+
 ### Post Navigation Hooks
 
 In some cases it may become necessary to perform a particular action on a page after it has been navigated to. Examples my be to disable animations or set some JavaScript value to indicate testing. If this is necessary, there's an action pipeline method that can be created to handle this. Simply create the class below in your project and use the _IPage_ object provided to get properties on the page or use the _GetNativePage<>()_ method to get the actual page class you created. This can be useful if you want to use a base class model and invoke the page on each call. The example also demonstrates how you can access the TokenManager inside the hook.
