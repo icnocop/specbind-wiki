@@ -69,3 +69,20 @@ In this case *field name* indicates the [[property|Page Model Properties]] that 
 | Ends With | The last row in the list matches the validations. |
 
 Custom validation rules can also be defined for the system, for more information see [[Custom Validation Rules]].
+
+### Validating List Counts ###
+
+Sometimes it may be necessary to count the number of items in a list. The following step actions support this:
+ 
+| Verb | Action |
+|------|--------|
+| Given | I saw \<field name\> list contains \<rule\> \<count\> items |
+| When | I see \<field name\> list contains \<rule\> \<count\> items |
+
+In this case *field name* indicates the [[property|Page Model Properties]] that represents the table and *rule* is the evaluation applied on the list (see below). *count* is the row count value to compare to. The available evaluation rules are:
+
+| List Rule | Description |
+|-----------|-------------|
+| exactly | The row count matches the *count* value exactly |
+| at least| The row count is a value equal to or greater than *count* |
+| at most | The row count is a value equal to or less than *count* |
