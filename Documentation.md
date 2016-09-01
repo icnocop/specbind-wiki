@@ -1,6 +1,7 @@
 ### Initial Setup
 * [[Getting Started With SpecBind]]
 * [[Configuration]]
+* [[Debugging]]
 
 ### Understanding Available Steps
 * [[Navigation Steps]]
