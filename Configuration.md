@@ -12,6 +12,7 @@ The following sample demonstrates what the SpecBind section will contain after i
     <section name="specBind" type="SpecBind.Configuration.ConfigurationSectionHandler, SpecBind"/>
   </configSections>
   <specBind>
+    <application startUrl="{application URL}" />
     <browserFactory provider="SpecBind.CodedUI.CodedUIBrowserFactory, SpecBind.CodedUI" browserType="IE" />
   </specBind>
 </configuration>
@@ -21,13 +22,21 @@ The following example shows all possible configuration options with their defaul
 
 ```xml
 <specBind>
-    <application startUrl="{application URL}" />
+    <application startUrl="{application URL}" retryValidationUntilTimeout="false" waitForStillElementBeforeClicking="false">
+        <excludedAssemblies>
+            <assembly name="MyCoolApp, Version=1.2.3.0, Culture=neutral, PublicKeyToken=null" />
+        </excludedAssemblies>
+    </application>
     <browserFactory provider="{provider assembly name}" 
                     browserType="IE"
 				    elementLocateTimeout="00:00:30"
-					pageLoadTimeout="00:00:30">
+                    ensureCleanSession="false"
+					pageLoadTimeout="00:00:30"
+                    reuseBrowser="false"
+                    validateWebDriver="true"
+                    waitForPendingAjaxCallsVia="none" >
 		<settings>
-			<add name="mySetting" value="something />
+			<add name="mySetting" value="something" />
 		</settings>
     </browserFactory>
 </specBind>
@@ -47,7 +56,22 @@ This section can be used to define specific settings for the application to use 
         <td>A browser URL (http://myapp.com)</td>
         <td>The base address of the application being tested.
             This will be combined with the application page addresses 
-            for navigation and validation.</td>
+            for navigation and validation. This can also be specified with an envrionment variable named <b>APPLICATION_START_URL</b>.</td>
+    </tr>
+    <tr>
+        <td>retryValidationUntilTimeout</td>
+        <td>true/false (false)</td>
+        <td>Indicates whether or not validation actions should retry until the standard ElementLocateTimeout.</td>
+    </tr>
+    <tr>
+        <td>waitForStillElementBeforeClicking</td>
+        <td>true/false (false)</td>
+        <td>Indicates whether or not to wait for an element to stop moving before clicking on it.</td>
+    </tr>
+    <tr>
+        <td>excludedAssemblies</td>
+        <td>A collection of named assemblies (see example)</td>
+        <td>A list of assembly names that are excluded from the search for steps.</td>
     </tr>
 </table>
 
@@ -75,15 +99,35 @@ This section can be used to define which back-end provider is being used to link
         <td>A time span to wait for an element to appear implicitly. (00:00:30)</td>
         <td>The drivers have implicit wait times for locating elements. Change this to speed up or slow down search times.</td>
     </tr>
+    <tr>
+        <td>ensureCleanSession</td>
+        <td>true/false (false)</td>
+        <td>Indicates whether the session cache and cookies should be cleared before starting.</td>
+    </tr>
 	<tr>
         <td>pageLoadTimeout</td>
         <td>A time span to wait for a page to complete loading. (00:00:30)</td>
         <td>The driver waits for a page load complete, change this if your application needs more time to load a page.</td>
     </tr>
+    <tr>
+        <td>reuseBrowser</td>
+        <td>true/false (false)</td>
+        <td>Indicates whether or not the same browser should be reused during tests.</td>
+    </tr>
 	<tr>
         <td>settings</td>
         <td>Name/Value elements that define custom settings for the driver to pick up.</td>
         <td>See the section below for supported custom settings for a driver.</td>
+    </tr>
+    <tr>
+        <td>validateWebDriver</td>
+        <td>true/false (true)</td>
+        <td>Indicates whether the web driver should be validated as functioning before running tests.</td>
+    </tr>
+    <tr>
+        <td>waitForPendingAjaxCallsVia</td>
+        <td>none/angular/jquery (none)</td>
+        <td>Indicates what mechanism to use to check for pending AJAX requests before proceeding with each step.</td>
     </tr>
 </table>
 
@@ -97,6 +141,7 @@ Each driver has its own supported browsers and the list below is subject to chan
 | Chrome  | Yes      | Yes         |
 | FireFox | Yes      | Yes         |
 | Safari  | No       | Yes         |
+| Edge    | No       | Yes         |
 | Android | No       | Remote Only |
 | iPhone  | No       | Remote Only |
 | iPad    | No       | Remote Only |
@@ -113,6 +158,10 @@ At this point there are no settings that need to be mapped from Coded UI.
 #### Selenium Settings
 
 Selenium support the concept of a "remote" driver. This driver allows you to call a 3rd party service to perform a test. To allow Selenium to support this, you need to specify a setting called "RemoteUrl" and give the URL of the remote Selenium service. The system will then use the browser type on the Remote URL. Any other settings are passed into Selenium's DesiredCapabilities settings section.
+
+##### Environment Variables
+
+If you want to supply a setting value through environment variables, set the value of the setting to the format  `${<variable name>}`. So for instance if your environment variable is `BROWSER_KEY` then the value would look like `${BROWSER_KEY}`.
 
 If you're interested in using BrowserStack with Selenium, the following settings will help you create a test.
 
