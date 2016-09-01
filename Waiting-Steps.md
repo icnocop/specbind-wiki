@@ -82,3 +82,29 @@ The example below shows waiting for Checkout to become enabled:
 ```Cucumber
 Given I waited for Checkout to become enabled
 ``` 
+
+**Check to see if ajax calls are completed**
+
+| Verb | Action |
+|------|--------|
+| Given | I wait for angular ajax calls to complete |
+| When |  I wait for angular ajax calls to complete |
+| Then |  I wait for angular ajax calls to complete | 
+
+| Verb | Action |
+|------|--------|
+| Given | I waited for angular ajax calls to complete |
+| When |  I waited for angular ajax calls to complete |
+| Then |  I waited for angular ajax calls to complete | 
+
+| Verb | Action |
+|------|--------|
+| Given | I wait for jquery ajax calls to complete |
+| When |  I wait for jquery ajax calls to complete |
+| Then |  I wait for jquery ajax calls to complete | 
+
+| Verb | Action |
+|------|--------|
+| Given | I waited for jquery ajax calls to complete |
+| When |  I waited for jquery ajax calls to complete |
+| Then |  I waited for jquery ajax calls to complete | 
