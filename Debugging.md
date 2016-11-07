@@ -13,9 +13,9 @@ If you want to add it to a single scenario add the `@Highlight` attribute to the
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <configuration>
-  <appsettings>
-    <add name="HighlightMode" value="true" />
-  </appsettings>
+  <appSettings>
+    <add key="HighlightMode" value="true" />
+  </appSettings>
 </configuration>
 ```
 
