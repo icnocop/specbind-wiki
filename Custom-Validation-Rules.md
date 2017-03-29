@@ -4,16 +4,17 @@ At times you might need to define a validation rule that SpecBind doesn't suppor
 
 All validation rules derive from the *IValidationComparer* interface. This interface is made up of the following:
 
-|| Field Type || Name || Description ||
-| Property | IsDefault | Defines wither this rule should be used if it doesn't match any other rules. This should be false by default.|
-| Property | RuleKeys | The rule values to match from the table that this rule processes. These should be lower case and not contain any filler word like "is", "the" etc. |
-| Method | Compare | Performs the comparison, passing in the property, expected value and actual value. |
+| Field Type | Name | Description |  
+|------------|------|-------------|   
+| Property | IsDefault | Defines wither this rule should be used if it doesn't match any other rules. This should be false by default.|  
+| Property | RuleKeys | The rule values to match from the table that this rule processes. These should be lower case, without spaces, and not contain any filler word like "is", "the" etc. |  
+| Method | Compare | Performs the comparison, passing in the property, expected value and actual value. |  
 
 Implementing this interface will make the rule get picked up by the framework. This can be used for complicated scenarios, but is not recommended.
 
 ### Basic Implementation: *ValidationComparerBase* Abstract Class
 
-The *ValidationComparerBase* class provides a simple implemtation of the *IValidationComparer* interface. It sets *IsDefault* to false and expects a base constructor with any rule keys passed in. The Compare method is abstract so you can implement this to match your rule.
+The *ValidationComparerBase* class provides a simple implementation of the *IValidationComparer* interface. It sets *IsDefault* to false and expects a base constructor with any rule keys passed in. The Compare method is abstract so you can implement this to match your rule.
 
 An extremely simple comparison is provided here to demonstrate how to create a rule from this base class:
 
